@@ -30,9 +30,9 @@
     <script src="/libs/jquery/jquery.min.js"></script>
 
 <meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="落樱酱的个人博客~" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 
@@ -477,7 +477,7 @@
 <p> 之后一路回车,<font color="#CE641E">但注意！！！！！当看到如下图是否配置shadowsocks，选择y，其余一律按回车！！！！！</font><br> <img src="https://cdn2.sublimerui.top/2021/02/17/g20.png"></p>
 <p> 下面会经过漫长的安装时间，如果出现意外安装失败，或长时间无响应，就关闭putty重新进行上述步骤，最终显示下图安装成功。</p>
 <p> <img src="https://cdn2.sublimerui.top/2021/02/17/g21.png"></p>
-<h2 id="端口放行"><a href="#端口放行" class="headerlink" title="端口放行"></a>端口放行</h2><p> 虽然我们安装成功了，但是我们的阿里云服务器却没有给“科学上网”服务放行端口，<br> <font color="#CE641E">因此我们我们在putty中输入v2ray出现下图–&gt;输入1–&gt;把端口号复制到本子上（选择按鼠标右键复制，不要用ctrl+c！！！）</font><br><img src="https://cdn2.sublimerui.top/2021/02/17/g24.png" alt="g24.png"><br><img src="https://cdn2.sublimerui.top/2021/02/17/g25.png" alt="g25.png"></p>
+<h2 id="端口放行"><a href="#端口放行" class="headerlink" title="端口放行"></a>端口放行</h2><p> 虽然我们安装成功了，但是我们的阿里云服务器却没有给“科学上网”服务放行端口，<br> <font color="#CE641E">因此我们我们在putty中输入v2ray出现下图–&gt;输入1–&gt;把端口号复制到本子上（选择按鼠标右键复制，不要用ctrl+c！！！）</font><br><img src="https://cdn2.sublimerui.top/2021/02/17/g24.png"><br><img src="https://cdn2.sublimerui.top/2021/02/17/g25.png"></p>
 <p>因为我们主要用shadowsocks，所有还要放行shadowsocks的端口，<font color="#CE641E">putty中输入v2ray–&gt;输入4–&gt;输入1（查看 Shadowsocks 配置信息）–&gt;把端口号复制到本子上（选择按鼠标右键复制，不要用ctrl+c！！！）</font></p>
 <p><img src="https://cdn2.sublimerui.top/2021/02/17/g26.png"><br><img src="https://cdn2.sublimerui.top/2021/02/17/g27.png"></p>
 <p>然后就要去阿里云控制台把刚刚记下来的端口给放行，按下图操作,分别放行<font color="#CE641E">v2ray和shadowsocks的两个端口号</font><br><img src="https://cdn2.sublimerui.top/2021/02/17/g22.png" alt="v2ray"><br><img src="https://cdn2.sublimerui.top/2021/02/17/g23.png" alt="shadowsocks"></p>
