@@ -6,7 +6,7 @@
   <link href="http://www.luoyingmm.com/atom.xml" rel="self"/>
   
   <link href="http://www.luoyingmm.com/"/>
-  <updated>2021-02-22T15:07:04.539Z</updated>
+  <updated>2021-02-16T14:28:18.000Z</updated>
   <id>http://www.luoyingmm.com/</id>
   
   <author>
@@ -15,32 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>搭建科学上网服务</title>
-    <link href="http://www.luoyingmm.com/2021/02/17/Over-the-wall/"/>
-    <id>http://www.luoyingmm.com/2021/02/17/Over-the-wall/</id>
-    <published>2021-02-17T07:14:43.000Z</published>
-    <updated>2021-02-22T15:07:04.539Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>对于的计算机的初学者，上网查询资料往往会遇到网页打不开的情况（例如google），这就代表我们需要些工具来突破限制，也就是俗称的“科学上网”。<br>其实“科学上网”的方法有很多，比如购买VPN或者选购机场服务。前者在往年比较流行，但随着科技的进步，使用VPN的流量可以完全被有关部门所察觉，因此这种方式不安全，不建议使用；反之后者（也就是选购机场服务）是目前较为主流的方式，但不是本文所叙述的主要内容，具体如何选购机场可以参考<a href="https://www.duyaoss.com/">这里</a>。<br>本文推荐自己搭建“科学上网”服务，为了照顾新手和小白，因此会用比较简单的方法完成搭建（一键脚本），并且图文并茂，相信大家一定能学会的。好了话不多说，我们开始吧~</p><hr><br><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><ol><li>一个服务器</li><li>一台能够正常使用并接入网络的电脑</li></ol><hr><br><h2 id="购买服务器"><a href="#购买服务器" class="headerlink" title="购买服务器"></a>购买服务器</h2><blockquote><p>注意：本示例为了方便快捷采用阿里云服务器，大家也可以选购国外的VPS可能更加安全，具体实现方式雷同。  </p></blockquote><p><a href="https://www.aliyun.com/">点击这里</a>进入阿里云官网，进入阿里云官网主页后，如下图。我们点击右上角<font color="#CE641E">“立即注册”</font>，用你的支付宝扫码从而完成注册，在此我就不过多演示了。<br><img src="https://cdn2.sublimerui.top/2021/02/17/g1.png"></p><p>注册完毕以后我们把鼠标放到主页面左上角产品上，点击左边弹性计算，然后点击右边第一列的<font color="#CE641E">“轻量应用服务器”</font>（详细看下图）。</p><p><img src="https://cdn2.sublimerui.top/2021/02/17/g2.png"></p><p>接着我们点击<font color="#CE641E">立即购买</font>按钮，如下图。<br><img src="https://cdn2.sublimerui.top/2021/02/17/g3.png"></p><p>接着我们便会进入购买界面，<font color="#CE641E">地域和可用区选择“中国（香港）”，接着镜像–&gt;选择系统镜像–&gt;CentOS7.6，套餐配置选择24元/月，数据盘选择0GB，购买时长1个月，购买数量1，接着点击右下角的立即购买，完成付款</font>，详细如下图。</p><p><img src="https://cdn2.sublimerui.top/2021/02/17/g4.png"></p><p>随后我们在服务协议后打钩，点击去付款，完成付款，这样我们的服务器就购买完毕啦。</p><p><img src="https://cdn2.sublimerui.top/2021/02/17/g5.png"></p><p>我们可以看到此时的服务器显示的是准备中，我们不用着急，等它准备完毕后（一般需要1分钟），显示运行中时，把鼠标放在如图所在位置，<font color="#CE641E">修改服务器管理密码</font>（密码一定要记住，随后远程连接服务器时要用到），并按照提示选择<font color="#CE641E">是的请立即重启服务器</font>。</p><p><img src="https://cdn2.sublimerui.top/2021/02/17/g9.png"></p><p>服务器重启完毕后点击CentOS这个大图标。<br><img src="https://cdn2.sublimerui.top/2021/02/17/g7.png"></p><p>随后我们会被跳转到服务器管理界面，记住自己的<font color="#CE641E">公网ip地址</font>（随后远程连接服务器时要用到）。</p><p><img src="https://cdn2.sublimerui.top/2021/02/17/g8.png"></p><hr><h2 id="使用putty远程连接服务器"><a href="#使用putty远程连接服务器" class="headerlink" title="使用putty远程连接服务器"></a>使用putty远程连接服务器</h2><p>如果你能做到这里恭喜你，说明你已经完成一半了。这时候我们应该会有疑惑，如何对服务器进行操作呢？服务器是否有图形化界面呢？但是我在这里很遗憾的告诉大家，服务端的CentOS是没有图形化界面的，只有大家俗称的“黑框框”。因此我们要用<font color="#CE641E">putty</font>这个远程连接服务器的工具（俗称“ssh工具”），在这个“黑框框”里输入相应的代码进行操作。不过，大家请放心，所有的代码我都会给各位的。<br>好了，废话不多说了，我们<a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">点击这里下载putty</a>，如下图，选择64位下载（64-bit）。<br><img src="https://cdn2.sublimerui.top/2021/02/17/g10.png"></p><p>下载完毕以后双击刚刚下载的<font color="#CE641E">putty-64bit-0.74-installer.msi</font>进行安装（可能名称有所不一样，以实际下载为准），<br>一路next下去，什么都不需要更改，但一定要记住<font color="#CE641E">安装的路径</font>，putty是不会创建桌面快捷方式的（默认在C:\Program Files\PuTTY里面）。<br><img src="https://cdn2.sublimerui.top/2021/02/17/11.png"><br>最后点Finish完成安装,可能会跳出README的文件，直接关闭即可。<br><img src="https://cdn2.sublimerui.top/2021/02/17/12.png"><br>我们打开刚刚安装的文件夹，看到如下图，选择putty.exe双击打开运行。</p><p><img src="https://cdn2.sublimerui.top/2021/02/17/g13.png"></p><p>接着按图片所示，填写服务器公网ip（之前复制的），后点击open</p><p><img src="https://cdn2.sublimerui.top/2021/02/17/g14.png"></p><p>会出现如图提示，不用慌张，这是你第一次连接服务器的警告，很正常，<font color="#CE641E">选择是</font></p><p><img src="https://cdn2.sublimerui.top/2021/02/17/g15.png"></p><p>然后看到如下图界面，按照下图样式填写，<font color="#CE641E">login as填root，按回车，password填你之前修改的密码（不用慌张，输入密码不会显示），接着按回车</font><br><img src="https://cdn2.sublimerui.top/2021/02/17/g16.png"><br><img src="https://cdn2.sublimerui.top/2021/02/17/g17.2.png"><br>看到下图则代表连接成功！！！<br><img src="https://cdn2.sublimerui.top/2021/02/17/g19.png"></p><p>接着复制下图代码，按鼠标右键粘贴进putty中，选择1安装</p><pre class="line-numbers language-none"><code class="language-none">bash &lt;(curl -s -L https://git.io/v2ray.sh)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p> 之后一路回车,<font color="#CE641E">但注意！！！！！当看到如下图是否配置shadowsocks，选择y，其余一律按回车！！！！！</font><br> <img src="https://cdn2.sublimerui.top/2021/02/17/g20.png"></p><p> 下面会经过漫长的安装时间，如果出现意外安装失败，或长时间无响应，就关闭putty重新进行上述步骤，最终显示下图安装成功。</p><p> <img src="https://cdn2.sublimerui.top/2021/02/17/g21.png"></p><h2 id="端口放行"><a href="#端口放行" class="headerlink" title="端口放行"></a>端口放行</h2><p> 虽然我们安装成功了，但是我们的阿里云服务器却没有给“科学上网”服务放行端口，<br> <font color="#CE641E">因此我们我们在putty中输入v2ray出现下图–&gt;输入1–&gt;把端口号复制到本子上（选择按鼠标右键复制，不要用ctrl+c！！！）</font><br><img src="https://cdn2.sublimerui.top/2021/02/17/g24.png"><br><img src="https://cdn2.sublimerui.top/2021/02/17/g25.png"></p><p>因为我们主要用shadowsocks，所有还要放行shadowsocks的端口，<font color="#CE641E">putty中输入v2ray–&gt;输入4–&gt;输入1（查看 Shadowsocks 配置信息）–&gt;把端口号复制到本子上（选择按鼠标右键复制，不要用ctrl+c！！！）</font></p><p><img src="https://cdn2.sublimerui.top/2021/02/17/g26.png"><br><img src="https://cdn2.sublimerui.top/2021/02/17/g27.png"></p><p>然后就要去阿里云控制台把刚刚记下来的端口给放行，按下图操作,分别放行<font color="#CE641E">v2ray和shadowsocks的两个端口号</font><br><img src="https://cdn2.sublimerui.top/2021/02/17/g22.png" alt="v2ray"><br><img src="https://cdn2.sublimerui.top/2021/02/17/g23.png" alt="shadowsocks"></p><p>这样我们打开“科学上网”工具就能访问goole啦！！！<br>具体“科学上网”工具使用请看下一篇文章。<br><img src="https://cdn2.sublimerui.top/2021/02/17/g28.png"></p><h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><blockquote><p>感谢阅读，这是博主第一次写文章，创作不易，也请大家多多支持啦！</p></blockquote>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;对于的计算机的初学者，上网查询资料往往会遇到网页打不开的情况（例如google），这就代表我们需要些工具来突破限制，也就是俗称的“科学上网”</summary>
-      
-    
-    
-    
-    
-    <category term="学习" scheme="http://www.luoyingmm.com/tags/%E5%AD%A6%E4%B9%A0/"/>
-    
-    <category term="网络" scheme="http://www.luoyingmm.com/tags/%E7%BD%91%E7%BB%9C/"/>
-    
-    <category term="服务器" scheme="http://www.luoyingmm.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    
-  </entry>
   
   <entry>
     <title>Hello World</title>
