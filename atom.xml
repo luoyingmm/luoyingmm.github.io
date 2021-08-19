@@ -6,7 +6,7 @@
   <link href="http://www.luoyingmm.com/atom.xml" rel="self"/>
   
   <link href="http://www.luoyingmm.com/"/>
-  <updated>2021-04-18T09:11:34.940Z</updated>
+  <updated>2021-08-19T08:54:29.475Z</updated>
   <id>http://www.luoyingmm.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>『Kotlin教程(1)』 变量、逻辑控制语句、类与可空变量</title>
+    <link href="http://www.luoyingmm.com/2021/08/19/Kotlin%E5%AD%A6%E4%B9%A0-1/"/>
+    <id>http://www.luoyingmm.com/2021/08/19/Kotlin%E5%AD%A6%E4%B9%A0-1/</id>
+    <published>2021-08-19T01:19:31.000Z</published>
+    <updated>2021-08-19T08:54:29.475Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>大家好我来更新博客啦，最近自己正在学习用Kotlin来编写Android，决定写篇博客来巩固自身Kotlin语法。本博客尽可能采用Kotlin与Java互相对照方式来呈现，因此需要读者有一定的Java基础。</p></blockquote><p>有关Kotlin的发展历史和环境搭建之类的请自行搜寻，毕竟大家也有一定的编程基础，就不再介绍了。</p><p>Kotlin 的基本数值类型包括<code>Int</code>、<code>Long</code>、<code>Short</code>、<code>Float</code>、<code>Double</code>、<code>Boolean</code>、<code>Char</code>、<code>Byte</code> 等基本数据类型，用法上与Java没有区别，但请仔细观察他们的大小写，避免不必要的错误。</p><h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>Kotlin的变量分为可变变量（var）和不可变变量(val)</p><a id="more"></a><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin">//对应的Kotlin代码如下var &lt;标识符&gt; : &lt;类型&gt; = &lt;初始化值&gt; //可变变量var a : Int = 1 //为可变变量整型a赋值为1val &lt;标识符&gt; : &lt;类型&gt; = &lt;初始化值&gt; //不可变变量val b: Int = 1 //为不可变变量整型a赋值为1print("a的大小为-&gt;$a") //输出a<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><pre class="line-numbers language-java" data-language="java"><code class="language-java">//对应的Java代码如下int a = 1;final int b = 1；    System.out.println("a的大小为-&gt;" + a);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li><p>在我们编写代码中一般优先考虑<strong>val（不可变变量）</strong></p></li><li><p>从上述代码可以很明显的发现Kotlin是<strong>先写标识符后写类型的</strong>，这点可能会不太习惯，需要多加练习</p></li><li><p>$ 符号表示引用的意思。这里理解为<strong>字符串模板</strong>，可快捷的对变量进行操作</p></li><li><p>每一行代码的结束可以省略掉分号 <strong>;</strong> 第一次写可能会有一点不习惯。</p></li><li><p>编译器支持自动类型判断,即声明时可以<strong>不指定类型,由编译器判断</strong>，因此上述代码可改为如下，我们应该尽可能的采用这种方式赋值</p><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin">var a = 1 //为可变变量整形a赋值为1val a = 1 //为不可变变量整形a赋值为1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h2 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h2></li></ul><p>Kotlin废除了Java中的for(初始值;条件;增减步长)这个规则。但是Kotlin中对于for循环语句新增了其他的规则，来满足我们的需求</p><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin">for(i in 0 until 3){    print("$i ") // 输出0 1 2 即为[n,m) 大于等于n,小于m}for (i in 3 downTo 0){    print("$i ") // 输出3 2 1 0 即为[n,m] 小于等于n,大于等于m ,n &gt; m}for (i in 0..3){    print("$i ") //输出0 1 2 3  即为[n,m] 大于等于n，小于等于m}for (i in 0..3 step 2){    print("$i ") //输出0 2   即设置步长为2}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><pre class="line-numbers language-java" data-language="java"><code class="language-java">//对应的Java代码for (int i = 0; i &lt; 3; i++) {    System.out.print(i + " ");}for (int i = 3; i &gt;= 0 ; i--) {    System.out.print(i + " ");}for (int i = 0; i &lt;= 3; i++) {    System.out.print(i + " ");}for (int i = 0; i &lt;= 3; i=i+2) {    System.out.print(i + " ");}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong>这里不再过多叙述，请仔细揣摩</strong></p><h2 id="When语句"><a href="#When语句" class="headerlink" title="When语句"></a>When语句</h2><p>在Kotlin中废除了Java的switch语句，改为When语句，When语句非常强大，还可以替代<strong>if else()语句</strong></p><pre class="line-numbers language-none"><code class="language-none">when(3){    1 -&gt; print("1")    2 -&gt; print("2")    else -&gt;{        print("3")    }}//最终输出3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><pre class="line-numbers language-java" data-language="java"><code class="language-java">//对应java代码switch (3){    case 1:        System.out.print("1");        break;    case 2:        System.out.print("2");        break;    default:        System.out.print("3");}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong>这里只做简单介绍，请自己多加摸索</strong></p><h2 id="类的使用以及声明可空变量"><a href="#类的使用以及声明可空变量" class="headerlink" title="类的使用以及声明可空变量"></a>类的使用以及声明可空变量</h2><p>Kotlin和Java一样也有类和方法，但在Kotlin中我们一般把方法称之为<strong>函数</strong>，类和函数的定义如下</p><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin">class a {  // 类名为 a    private val age = 15    private lateinit var name: String //声明一个变量并延迟初始化    private var hobby: String? = null //要给变量赋值为null或0时，需要在类型后加？    // private val num2  会报错，Kotlin在类中的基本数值类型必须初始化且无法使用lateinit延迟初始化    fun say() {        // num = 17 报错，因为声明的是 val 所以不能修改        name = "张三"        print("我叫$name，今年${age}岁了")    } // 成员函数}fun main() {    val b:a = a() //实例化    b.say() //调用函数sum 输出:我叫张三，今年 15 岁了}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><pre class="line-numbers language-java" data-language="java"><code class="language-java">//对应的Java代码class a{    private final int age = 15;    private String name;    private String hobby = null;    void say(){        name = "张三";        System.out.println("我叫" + name + ",今年" + age + "岁了");    }    public static void main(String[] args) {       final a b = new b();        b.say();    }}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li>由于 Kotlin 的空安全机制，可以有效防止程序出现空指针异常，因此需要进行额外的处理</li><li>创建成员对象必须初始化，如果不初始化，需使用<strong>lateinit</strong>关键字</li><li>基本数值类型无法使用<strong>lateinit</strong>关键字，必须赋值</li><li>要给变量赋值为null或0时，需要在类型后加?</li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;大家好我来更新博客啦，最近自己正在学习用Kotlin来编写Android，决定写篇博客来巩固自身Kotlin语法。本博客尽可能采用Kotlin与Java互相对照方式来呈现，因此需要读者有一定的Java基础。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;有关Kotlin的发展历史和环境搭建之类的请自行搜寻，毕竟大家也有一定的编程基础，就不再介绍了。&lt;/p&gt;
+&lt;p&gt;Kotlin 的基本数值类型包括&lt;code&gt;Int&lt;/code&gt;、&lt;code&gt;Long&lt;/code&gt;、&lt;code&gt;Short&lt;/code&gt;、&lt;code&gt;Float&lt;/code&gt;、&lt;code&gt;Double&lt;/code&gt;、&lt;code&gt;Boolean&lt;/code&gt;、&lt;code&gt;Char&lt;/code&gt;、&lt;code&gt;Byte&lt;/code&gt; 等基本数据类型，用法上与Java没有区别，但请仔细观察他们的大小写，避免不必要的错误。&lt;/p&gt;
+&lt;h2 id=&quot;变量&quot;&gt;&lt;a href=&quot;#变量&quot; class=&quot;headerlink&quot; title=&quot;变量&quot;&gt;&lt;/a&gt;变量&lt;/h2&gt;&lt;p&gt;Kotlin的变量分为可变变量（var）和不可变变量(val)&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="学习笔记" scheme="http://www.luoyingmm.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="学习" scheme="http://www.luoyingmm.com/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="Kotlin" scheme="http://www.luoyingmm.com/tags/Kotlin/"/>
+    
+  </entry>
   
   <entry>
     <title>Android线程</title>
